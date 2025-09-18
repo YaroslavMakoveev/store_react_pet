@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
-import { Container, Row, Col, Button, Card, Form } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Card,
+  Form,
+  Spinner,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import NavBar from "../components/NavBar";
@@ -10,6 +18,7 @@ const CatalogPage = () => {
   const [searchTheme, setSearchTheme] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   // PRODUCTS
   useEffect(() => {
@@ -18,8 +27,10 @@ const CatalogPage = () => {
         const res = await fetch("https://fakestoreapi.com/products");
         const data = await res.json();
         setProducts(data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
     fetchProducts();
@@ -45,6 +56,21 @@ const CatalogPage = () => {
       selectedCategory === "all" ? true : p.category === selectedCategory;
     return bySearch && byCategory;
   });
+
+  if (loading) {
+    return (
+      <>
+        <NavBar />
+        <Container
+          fluid
+          className="d-flex justify-content-center align-items-center"
+          style={{ minHeight: "80vh" }}
+        >
+          <Spinner animation="border" variant="primary" />
+        </Container>
+      </>
+    );
+  }
 
   return (
     <>
@@ -76,7 +102,7 @@ const CatalogPage = () => {
           {filteredProducts.length >= 1 ? (
             <>
               {filteredProducts.map((p) => (
-                <Col key={p.id} md={3} className="mb-4">
+                <Col key={p.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
                   <Card
                     style={{ height: "100%" }}
                     className="d-flex flex-column"
@@ -90,7 +116,9 @@ const CatalogPage = () => {
                       <Card.Title style={{ fontSize: "1rem" }}>
                         {p.title}
                       </Card.Title>
-                      <Card.Text>{p.price} $</Card.Text>
+                      <Card.Text className="text-success">
+                        {p.price} $
+                      </Card.Text>
                       <div className="mt-auto">
                         <Button
                           variant="primary"
@@ -106,7 +134,9 @@ const CatalogPage = () => {
             </>
           ) : (
             <>
-              <h2 className="text-center mt-3">NO RESULTS</h2>
+              <div className="text-center mt-3">
+                <h2 className="text-muted">NO RESULTS</h2>
+              </div>
             </>
           )}
         </Row>

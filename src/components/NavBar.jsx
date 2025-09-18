@@ -6,12 +6,11 @@ function NavBar() {
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href="#home">Fake Store API</Navbar.Brand>
+        <Navbar.Brand href="/">Fake Store API</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Button variant="outline-light" onClick={() => navigate("/cart")}>
-            {" "}
-            Cart{" "}
+            Cart
           </Button>
         </Navbar.Collapse>
       </Container>

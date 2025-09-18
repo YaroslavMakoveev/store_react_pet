@@ -18,7 +18,7 @@ const ProductPage = () => {
         setProduct(data);
         setLoading(false);
       } catch (error) {
-        console.error("Ошибка загрузки товара:", error);
+        console.error(error);
         setLoading(false);
       }
     };
@@ -30,7 +30,11 @@ const ProductPage = () => {
     return (
       <>
         <NavBar />
-        <Container className="mt-4 text-center">
+        <Container
+          fluid
+          className="d-flex justify-content-center align-items-center"
+          style={{ minHeight: "80vh" }}
+        >
           <Spinner animation="border" variant="primary" />
         </Container>
       </>
