@@ -1,5 +1,6 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
+import { Button } from "react-bootstrap";
 
 function NavBar() {
   return (
@@ -8,9 +9,7 @@ function NavBar() {
         <Navbar.Brand href="#home">Fake Store API</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
-            Signed in as: <a href="#login">Mark Otto</a>
-          </Navbar.Text>
+          <Button variant="outline-light"> Cart </Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>

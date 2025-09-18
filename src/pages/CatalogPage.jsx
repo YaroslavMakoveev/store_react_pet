@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Card, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import NavBar from "../components/NavBar";
 
@@ -8,6 +9,7 @@ const CatalogPage = () => {
   const [categories, setCategories] = useState([]);
   const [searchTheme, setSearchTheme] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const navigate = useNavigate();
 
   // PRODUCTS
   useEffect(() => {
@@ -74,7 +76,7 @@ const CatalogPage = () => {
           {filteredProducts.length >= 1 ? (
             <>
               {filteredProducts.map((p) => (
-                <Col key={p.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
+                <Col key={p.id} md={3} className="mb-4">
                   <Card
                     style={{ height: "100%" }}
                     className="d-flex flex-column"
@@ -90,7 +92,12 @@ const CatalogPage = () => {
                       </Card.Title>
                       <Card.Text>{p.price} $</Card.Text>
                       <div className="mt-auto">
-                        <Button variant="primary">Go to product page</Button>
+                        <Button
+                          variant="primary"
+                          onClick={() => navigate(`/product-page/${p.id}`)}
+                        >
+                          Go to product page
+                        </Button>
                       </div>
                     </Card.Body>
                   </Card>
