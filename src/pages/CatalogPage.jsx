@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar";
 const CatalogPage = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [searchThem, setSearchThem] = useState("");
+  const [searchTheme, setSearchTheme] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   // PRODUCTS
@@ -37,10 +37,8 @@ const CatalogPage = () => {
     fetchCategories();
   }, []);
 
-  // FILTER PRODUCTS
-
   const filteredProducts = products.filter((p) => {
-    const bySearch = p.title.toLowerCase().includes(searchThem.toLowerCase());
+    const bySearch = p.title.toLowerCase().includes(searchTheme.toLowerCase());
     const byCategory =
       selectedCategory === "all" ? true : p.category === selectedCategory;
     return bySearch && byCategory;
@@ -50,20 +48,19 @@ const CatalogPage = () => {
     <>
       <NavBar />
       <Container className="mt-4">
-        <div>
-          <Form>
-            <Form.Control
-              type="text"
-              placeholder="Search..."
-              value={searchThem}
-              onChange={(e) => setSearchThem(e.target.value)}
-              className="mb-2 w-100"
-            />
-          </Form>
+        <Form className="mb-4">
+          <Form.Label>Search by name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Search..."
+            value={searchTheme}
+            onChange={(e) => setSearchTheme(e.target.value)}
+            className="mb-2"
+          />
+          <Form.Label>Search by category</Form.Label>
           <Form.Select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="mb-4"
           >
             <option value="all">All categories</option>
             {categories.map((cat) => (
@@ -72,28 +69,39 @@ const CatalogPage = () => {
               </option>
             ))}
           </Form.Select>
-        </div>
+        </Form>
         <Row>
-          {filteredProducts.map((p) => (
-            <Col key={p.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
-              <Card style={{ height: "100%" }} className="d-flex flex-column">
-                <Card.Img
-                  variant="top"
-                  src={p.image}
-                  style={{ height: "200px", objectFit: "contain" }}
-                />
-                <Card.Body className="d-flex flex-column">
-                  <Card.Title style={{ fontSize: "1rem" }}>
-                    {p.title}
-                  </Card.Title>
-                  <Card.Text>{p.price} $</Card.Text>
-                  <div className="mt-auto">
-                    <Button variant="primary">Go to product page</Button>
-                  </div>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
+          {filteredProducts.length >= 1 ? (
+            <>
+              {filteredProducts.map((p) => (
+                <Col key={p.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
+                  <Card
+                    style={{ height: "100%" }}
+                    className="d-flex flex-column"
+                  >
+                    <Card.Img
+                      variant="top"
+                      src={p.image}
+                      style={{ height: "200px", objectFit: "contain" }}
+                    />
+                    <Card.Body className="d-flex flex-column">
+                      <Card.Title style={{ fontSize: "1rem" }}>
+                        {p.title}
+                      </Card.Title>
+                      <Card.Text>{p.price} $</Card.Text>
+                      <div className="mt-auto">
+                        <Button variant="primary">Go to product page</Button>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </>
+          ) : (
+            <>
+              <h2 className="text-center mt-3">NO RESULTS</h2>
+            </>
+          )}
         </Row>
       </Container>
     </>
