@@ -49,7 +49,6 @@ const ProductPage = () => {
   if (loading) {
     return (
       <>
-        <NavBar />
         <Container
           fluid
           className="d-flex justify-content-center align-items-center"
@@ -64,7 +63,6 @@ const ProductPage = () => {
   if (!product) {
     return (
       <>
-        <NavBar />
         <Container className="mt-4 text-center">
           <h2>No results</h2>
           <Button variant="secondary" onClick={() => navigate(-1)}>
@@ -77,8 +75,7 @@ const ProductPage = () => {
 
   return (
     <>
-      <NavBar />
-      <Container className="mt-4">
+      <Container className="mt-4" style={{ minHeight: "80vh" }}>
         <Button
           variant="secondary"
           className="mb-3"

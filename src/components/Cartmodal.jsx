@@ -87,7 +87,7 @@ function CartModal() {
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-between align-items-center">
           <h5>
-            Итоговая цена: <span className="text-success">{total}$</span>
+            Total price: <span className="text-success">{total}$</span>
           </h5>
           <Button variant="secondary" onClick={handleClose}>
             Close

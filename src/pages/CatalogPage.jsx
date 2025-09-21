@@ -10,8 +10,6 @@ import {
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-import NavBar from "../components/NavBar";
-
 const CatalogPage = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -60,7 +58,6 @@ const CatalogPage = () => {
   if (loading) {
     return (
       <>
-        <NavBar />
         <Container
           fluid
           className="d-flex justify-content-center align-items-center"
@@ -74,7 +71,6 @@ const CatalogPage = () => {
 
   return (
     <>
-      <NavBar />
       <Container className="mt-4">
         <Form className="mb-4">
           <Form.Label>Search by name</Form.Label>
