@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/store_react_pet/static/css/main.f855e6bc.css",
-    "main.js": "/store_react_pet/static/js/main.bd217f62.js",
+    "main.js": "/store_react_pet/static/js/main.23a06bbb.js",
     "static/js/453.af4c11e6.chunk.js": "/store_react_pet/static/js/453.af4c11e6.chunk.js",
     "index.html": "/store_react_pet/index.html",
     "main.f855e6bc.css.map": "/store_react_pet/static/css/main.f855e6bc.css.map",
-    "main.bd217f62.js.map": "/store_react_pet/static/js/main.bd217f62.js.map",
+    "main.23a06bbb.js.map": "/store_react_pet/static/js/main.23a06bbb.js.map",
     "453.af4c11e6.chunk.js.map": "/store_react_pet/static/js/453.af4c11e6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.bd217f62.js"
+    "static/js/main.23a06bbb.js"
   ]
 }
