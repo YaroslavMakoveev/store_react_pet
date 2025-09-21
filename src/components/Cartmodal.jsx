@@ -11,11 +11,20 @@ function CartModal() {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
+  const [total, setTotal] = useState("");
 
   const removeFromCart = (id) => {
     const updatedCart = cart.filter((item) => item.id !== id);
     setCart(updatedCart);
   };
+
+  useEffect(() => {
+    const totalPrice = (cart) => {
+      const sum = cart.reduce((total, item) => total + item.price, 0);
+      setTotal(sum.toFixed(2)); // Ограничиваем до 2 знаков после запятой
+    };
+    totalPrice(cart);
+  }, [cart]);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -57,9 +66,9 @@ function CartModal() {
                         </Card.Title>
                         <Card.Text className="mb-0">
                           <strong>Price:</strong>{" "}
-                          <storng className="text-success">
+                          <span className="text-success">
                             {cartItem.price}$
-                          </storng>
+                          </span>
                         </Card.Text>
                       </div>
 
@@ -76,7 +85,10 @@ function CartModal() {
             </>
           )}
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="d-flex justify-content-between align-items-center">
+          <h5>
+            Итоговая цена: <span className="text-success">{total}$</span>
+          </h5>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
