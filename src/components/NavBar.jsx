@@ -1,17 +1,14 @@
 import { Button, Navbar, Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import CartModal from "./Cartmodal";
 
 function NavBar() {
-  const navigate = useNavigate();
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
         <Navbar.Brand href="/">Fake Store API</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <Button variant="outline-light" onClick={() => navigate("/cart")}>
-            Cart
-          </Button>
+          <CartModal />
         </Navbar.Collapse>
       </Container>
     </Navbar>

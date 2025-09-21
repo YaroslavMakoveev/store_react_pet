@@ -8,6 +8,10 @@ const ProductPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,6 +29,22 @@ const ProductPage = () => {
 
     fetchProduct();
   }, [id]);
+
+  const addToCart = (product) => {
+    const isInCart = cart.some((item) => item.id === product.id);
+
+    if (isInCart) {
+      alert("The product is already in the cart");
+    } else {
+      setCart([...cart, product]);
+      navigate("/");
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    console.log(cart);
+  }, [cart]);
 
   if (loading) {
     return (
@@ -46,9 +66,9 @@ const ProductPage = () => {
       <>
         <NavBar />
         <Container className="mt-4 text-center">
-          <h2>Товар не найден</h2>
+          <h2>No results</h2>
           <Button variant="secondary" onClick={() => navigate(-1)}>
-            Назад
+            Back to catalog
           </Button>
         </Container>
       </>
@@ -80,7 +100,9 @@ const ProductPage = () => {
             <p>
               <strong>Category:</strong> {product.category}
             </p>
-            <Button variant="primary">Add to cart</Button>
+            <Button variant="primary" onClick={() => addToCart(product)}>
+              Add to cart
+            </Button>
           </Col>
         </Row>
       </Container>
