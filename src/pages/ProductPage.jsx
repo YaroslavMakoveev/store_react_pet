@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button, Card, Spinner } from "react-bootstrap";
 
-import NavBar from "../components/NavBar";
-
 const ProductPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -38,6 +36,7 @@ const ProductPage = () => {
     } else {
       setCart([...cart, product]);
       navigate("/");
+      window.location.reload();
     }
   };
 
