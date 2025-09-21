@@ -5,7 +5,7 @@ import ProductPage from "./pages/ProductPage";
 
 function App() {
   return (
-    <Router basename="/store_react_pet/">
+    <Router>
       <Routes>
         <Route path="/" element={<CatalogPage />} />
         <Route path="/product-page/:id" element={<ProductPage />} />
